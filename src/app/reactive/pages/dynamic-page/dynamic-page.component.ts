@@ -10,10 +10,10 @@ import { filter, map } from 'rxjs/operators';
 export class DynamicPageComponent {
 public myFormDynamic:FormGroup = this.fb.group({
   name: ['', [Validators.required, Validators.minLength(3)]],
-  favoriteGames: [this.fb.array([
+  favoriteGames: this.fb.array([
     ['Metal Gear', Validators.required],
     ['Death Stranding', Validators.required]
-  ])]
+  ])
 });
 
 //para enlazar el input de agregar un nuevo favorito
@@ -83,7 +83,7 @@ onDeleteFavorite(index: number): void{
 
 onAddFavorite(): void{
   if(this.newFavorite.invalid) return;
-  console.log(this.newFavorite.value);
+  //console.log(this.newFavorite.value);
   const newGame = this.newFavorite.value;
   this.favoriteGames.push(
     this.fb.control(newGame, Validators.required)
@@ -100,6 +100,7 @@ onSubmit(): void{
     return;
   }
   console.log(this.myFormDynamic.value);
+  //para que no aparezcan las cajas de input vacias
   ( this.myFormDynamic.controls['favoriteGames'] as FormArray) = this.fb.array([]);
   this.myFormDynamic.reset();
 }
