@@ -81,6 +81,7 @@ onDeleteFavorite(index: number): void{
 }
 
 
+
 onAddFavorite(): void{
   if(this.newFavorite.invalid) return;
   //console.log(this.newFavorite.value);
