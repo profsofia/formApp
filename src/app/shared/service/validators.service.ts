@@ -21,4 +21,23 @@ export class ValidatorsService {
     return form.controls[field].errors
      && form.controls[field].touched;
   }
+
+  public isFieldOneEqualToFieldTwo(field1: string, field2: string){
+
+
+    //si esta funcion que recibe un formGrup, en este caso, si la tipamos así, marca en register-page.ts una advertencia como que el formulario se encuentra en desuso.
+    return (formGroup: FormGroup): ValidationErrors | null=>{
+     const fieldValue1= formGroup.get(field1)?.value;
+     const fieldValue2= formGroup.get(field2)?.value;
+
+     if(fieldValue1 !== fieldValue2){
+      formGroup.get(field2)?.setErrors({notEqual: true});
+      return {notEqual: true}
+     }
+     formGroup.get(field2)?.setErrors(null);
+     return null;
+
+    }
+
+  }
 }
