@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { of, pipe } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { ValidatorsService } from 'src/app/shared/service/validators.service';
 @Component({
   templateUrl: './dynamic-page.component.html',
-  styles: [
-  ]
+
 })
 export class DynamicPageComponent {
 public myFormDynamic:FormGroup = this.fb.group({
@@ -58,7 +58,9 @@ getFieldError(field : string){
   return null;
 }
 
-constructor(private fb: FormBuilder){}
+constructor(
+  private validatorsServ: ValidatorsService,
+  private fb: FormBuilder){}
 
 /*ngOnInit(): void {
 

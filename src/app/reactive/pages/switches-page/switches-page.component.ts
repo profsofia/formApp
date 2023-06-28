@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidatorsService } from 'src/app/shared/service/validators.service';
 
 @Component({
   templateUrl: './switches-page.component.html'
@@ -15,14 +16,13 @@ public person ={
   gender: 'M',
   wantNotifications: true,
 }
-constructor(private formBuilder: FormBuilder){}
+constructor(private valdatorsServ: ValidatorsService,private formBuilder: FormBuilder){}
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
 isValidField(field : string){
-  return this.myFormwithValidators.controls[field].errors
-   && this.myFormwithValidators.controls[field].touched;
+  return this.valdatorsServ.isValidField(this.myFormwithValidators, field)
 }
 
 onSave(){
